@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "pyngleton_yourlogarithm"
 version = "0.0.1"
 authors = [
-  { name="Vlad-Sebastian Cretu", email="vlad.sebastian.cretu.dev@gmai;.com" },
+  { name="Vlad-Sebastian Cretu", email="vlad.sebastian.cretu.dev@gmail.com" },
 ]
 description = "A small example package"
 readme = "README.md"
