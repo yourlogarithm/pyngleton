@@ -56,3 +56,15 @@ class TestSingleton(unittest.TestCase):
             names.append(queue.get())
 
         self.assertEqual(5, len(set(names)))
+
+    def test_subclasses(self):
+        class A(Singleton):
+            pass
+
+        class B(Singleton):
+            pass
+
+        a = A()
+        b = B()
+
+        self.assertNotEqual(a, b)
