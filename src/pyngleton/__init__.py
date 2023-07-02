@@ -2,7 +2,7 @@ import os
 import threading
 
 
-class _SingletonMeta(type):
+class SingletonMeta(type):
     """
     This is a metaclass that creates a Singleton instance. It creates the instance in a
     process-safe and thread-safe manner.
@@ -26,7 +26,7 @@ class _SingletonMeta(type):
         return cls._instances[pid]
 
 
-class Singleton(metaclass=_SingletonMeta):
+class Singleton(metaclass=SingletonMeta):
     """
     This is the Singleton class that uses the SingletonMeta metaclass. It should be inherited by any class
     that should be a Singleton.
@@ -39,4 +39,4 @@ class Singleton(metaclass=_SingletonMeta):
             cls._instances.clear()
 
 
-__all__ = ['Singleton']
+__all__ = ['Singleton', 'SingletonMeta']
