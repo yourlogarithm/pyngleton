@@ -1,0 +1,3 @@
+Thread-safe and process-safe singleton class.
+The singleton is shared between between all threads.
+For every process, a new instance is initialized and shared between all threads of the process.
