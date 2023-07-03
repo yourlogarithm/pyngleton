@@ -1,14 +1,12 @@
 import unittest
 
-from src.pyngleton import Singleton
+from src.pyngleton import singleton, Singleton, SingletonMeta
 
 
 class TestSingleton(unittest.TestCase):
-    def setUp(self) -> None:
-        Singleton.reset()
-
     def test_singleton_sequential(self):
-        class MySingleton(Singleton):
+        @singleton
+        class MySingleton:
             def __init__(self, name):
                 self.name = name
 
@@ -21,7 +19,8 @@ class TestSingleton(unittest.TestCase):
     def test_singleton_class_multithreading(self):
         from concurrent.futures import ThreadPoolExecutor
 
-        class MySingleton(Singleton):
+        @singleton
+        class MySingleton:
             def __init__(self, name=None):
                 self.name = name
 
@@ -39,7 +38,8 @@ class TestSingleton(unittest.TestCase):
     def test_singleton_class_multiprocessing(self):
         import multiprocessing
 
-        class MySingleton(Singleton):
+        @singleton
+        class MySingleton:
             def __init__(self, name, q: multiprocessing.Queue):
                 self.name = name
                 q.put(name)
@@ -57,14 +57,27 @@ class TestSingleton(unittest.TestCase):
 
         self.assertEqual(5, len(set(names)))
 
-    def test_subclasses(self):
-        class A(Singleton):
+    def test_differences(self):
+        @singleton
+        class A:
             pass
 
-        class B(Singleton):
+        @singleton
+        class B:
             pass
 
         a = A()
         b = B()
 
         self.assertNotEqual(a, b)
+
+    def test_inheriting(self):
+        class A(Singleton):
+            pass
+
+        class B(metaclass=SingletonMeta):
+            pass
+
+        self.assertEqual(A(), A())
+        self.assertEqual(B(), B())
+        self.assertNotEqual(A(), B())

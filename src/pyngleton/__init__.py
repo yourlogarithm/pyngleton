@@ -2,7 +2,24 @@ import os
 import threading
 
 
-class _SingletonMeta(type):
+def singleton(cls):
+    """
+    Decorator for declaring the class as a thread-safe & process-safe singleton.
+    """
+    instances = {}
+    lock = threading.Lock()
+
+    def wrapper(*args, **kwargs):
+        key = (os.getpid(), cls.__name__)
+        if key not in instances:
+            with lock:
+                if key not in instances:
+                    instances[key] = cls(*args, **kwargs)
+        return instances[key]
+    return wrapper
+
+
+class SingletonMeta(type):
     """
     This is a metaclass that creates a Singleton instance. It creates the instance in a
     process-safe and thread-safe manner.
@@ -26,16 +43,11 @@ class _SingletonMeta(type):
         return cls._instances[key]
 
 
-class Singleton(metaclass=_SingletonMeta):
+class Singleton(metaclass=SingletonMeta):
     """
     This is the Singleton class that uses the SingletonMeta metaclass. It should be inherited by any class
     that should be a Singleton.
     """
 
-    @classmethod
-    def reset(cls):
-        with cls._lock:
-            cls._instances.clear()
 
-
-__all__ = ['Singleton']
+__all__ = ['singleton', 'Singleton', 'SingletonMeta']
