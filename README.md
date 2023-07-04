@@ -2,9 +2,9 @@ Thread-safe and process-safe singleton class.
 The singleton is shared between all threads.
 For every process, a new instance is initialized and shared between all threads of the process.
 
-<h3>Examples:</h3>
-<h4>Basic usage:</h4>
-```
+## Examples
+### Basic usage:
+```python
 from pyngleton import singleton
 
 @singleton
@@ -23,8 +23,8 @@ if __name__ == '__main__':
     assert b.x == 1 and b.y == 2 and b.z == 3
 ```
 
-<h4>Multithreading:</h4>
-```
+### Multithreading:
+```python
 from concurrent.futures import ThreadPoolExecutor
 from pyngleton import singleton
    
@@ -40,8 +40,8 @@ if __name__ == '__main__':
     assert len(results) == 1  # all threads share the same instance
 ```
 
-<h4>Multiprocessing:</h4>
-```
+### Multiprocessing:
+```python
 import multiprocessing
 from concurrent.futures import ProcessPoolExecutor
 from pyngleton import singleton
@@ -72,8 +72,8 @@ if __name__ == '__main__':
 The classes decorated with `@singleton` can't be pickled. If you want to be able to do that, 
 you can inherit from `Singleton` or `SingletonMeta` instead of using the decorator.
 
-<h4>Inherting:</h4>
-```
+### Inherting:
+```python
 from pyngleton import Singleton, SingletonMeta
 
 class MyClassA(metaclass=SingletonMeta):
