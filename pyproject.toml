@@ -4,13 +4,12 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pyngleton"
-version = "0.0.6"
+version = "0.0.7"
 authors = [
   { name="Vlad-Sebastian Cretu", email="vlad.sebastian.cretu.dev@gmail.com" },
 ]
-description = "A small example package"
+description = "Singleton decorator/class/metaclass"
 readme = "README.md"
-requires-python = ">=3.7"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
