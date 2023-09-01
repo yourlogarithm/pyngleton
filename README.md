@@ -72,7 +72,7 @@ if __name__ == '__main__':
 The classes decorated with `@singleton` can't be pickled. If you want to be able to do that, 
 you can inherit from `Singleton` or `SingletonMeta` instead of using the decorator.
 
-### Inherting:
+### Inheriting:
 ```python
 from pyngleton import Singleton, SingletonMeta
 
